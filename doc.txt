@@ -33,3 +33,6 @@ mapa
 				   diferente, retorna 0;
 
 
+--- exemplo de algoritmo que soluciona: 
+https://github.com/mission-peace/interview/blob/master/src/com/interview/dynamic/MaximumSizeSubMatrix.java
+
