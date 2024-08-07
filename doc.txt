@@ -42,3 +42,6 @@ numero de dois digitos, vai dar ruim
 	então tenho que passar map + x, sendo x o total de char da primeira linha - 3
 
 
+--- exemplo de algoritmo que soluciona: 
+https://github.com/mission-peace/interview/blob/master/src/com/interview/dynamic/MaximumSizeSubMatrix.java
+
