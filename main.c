@@ -86,8 +86,8 @@ int	main(int argc, char *argv[])
 	map_info = ft_map_info(map);
 	if(map_is_valid(map, map_info))
 	{
+		printf("valid");
 		matrix_map = convert_to_matrix(map + 5, &rows, &cols);
-
 		max_sub_matrix(matrix_map, rows, cols);
     		free(matrix_map);
 
@@ -95,24 +95,3 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

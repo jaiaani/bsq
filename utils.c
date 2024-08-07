@@ -38,16 +38,18 @@ int	ft_linelen(char *map)
 	return (i);
 }
 
-int ft_atoi_basic(char *str) 
+int	ft_is_printable(char c)
 {
-	int	i;
-	int	x;
+    return (c >= 32 && c <= 126);
+}
 
-	i = 0;
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		x = x * 10 + (str[i] - 48);
-		i++;
-	}
-	return (x);
+int ft_atoi_basic(char *str) {
+    int i = 0;
+    int x = 0;
+
+    while (str[i] >= '0' && str[i] <= '9') {
+        x = x * 10 + (str[i] - '0');
+        i++;
+    }
+    return x;
 }
