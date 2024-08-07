@@ -46,7 +46,7 @@ int	map_catch(char *file, char *dest)
 	return (0);
 }
 
-char	*ft_map_chars(char *map)
+char	*ft_map_info(char *map)
 {
 	int	i;
 	char		*map_chars;
@@ -102,17 +102,40 @@ int	map_check_breaklines(char *map, int num_l, int len_l)
 	
 	i = 0;
 	bl = len_l;
-	printf("%d"
 	while (i <= num_l)
 	{
 		if(map[bl] != '\n')
-			printf(":%c: = %d\n", map[bl], bl);
-		len_l = len_l + 1;
-		bl = bl + len_l;
+		{
+			return (0);
+			len_l = len_l + 1;
+			bl = bl + len_l;
+		}
 		i++;
 	}
 	return (1);
 }
+
+int	map_check_chars(char *map, char *map_info)
+{
+	char	empty;
+	char	obstacle;
+	char	full;
+	int	i;
+
+	empty = map_info[1];
+	obstacle = map_info[2];
+	full = map_info[3];
+	i = 0;
+	while(map[i])
+	{
+		if(map[i] != empty || map[i] != obstacle || map[i] != full || map[i] != '\n')
+		{
+			printf("%c %c %c", empty, obstacle, full);
+		}
+		i++;
+	}
+	return (1);
+} //wip
 
 int	teste(char *map)
 {
@@ -127,19 +150,20 @@ int	teste(char *map)
 int	main(int argc, char *argv[])
 {
 	char	map[BUF_SIZE];
-	char	*map_chars;
+	char	*map_info;
 	int	ft_linel;
 
 
 	map_catch(argv[1], map);
 	ft_linel = ft_linelen(map + 5);
 	//printf("%d", ft_linel);
-	//map_chars = ft_map_chars(map);
-	//printf("the length of lines are valid?: %d", map_check_lineslen(map + 5));
-	printf("the lines end with break line?: %d", map_check_breaklines(map + 5, 8, ft_linel));
+	map_info = ft_map_info(map);
+	printf("the length of lines are valid?: %d\n", map_check_lineslen(map + 5));
+	printf("the lines end with break line?: %d\n", map_check_breaklines(map + 5, 8, ft_linel));
+	printf("the chars of the map are valid? %d\n", map_check_chars(map, map_info));
 	//printf("%d", ft_strlen(map));
 	//printf("%s\n", map_chars);
 	//printf("%s", map);
-	//teste(map + 5);
+//	teste(map + 5);
 	return (0);
 }
