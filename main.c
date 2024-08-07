@@ -14,18 +14,16 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define	BUF_SIZE 1024
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while(str[i])
-		i++;
-	return (i);
-}
+int	map_is_valid(char *map, char *map_info);
+int	ft_atoi_basic(char c);
+int	ft_linelen(char *map);
+char	*ft_strndup(char *str, int n);
+int	max_sub_matrix(char **matrix_map, int rows, int cols);
+char	**convert_to_matrix(char *map, int *rows, int *cols);
 
 int	map_catch(char *file, char *dest)
 {
@@ -49,121 +47,72 @@ int	map_catch(char *file, char *dest)
 char	*ft_map_info(char *map)
 {
 	int	i;
-	char		*map_chars;
-	
-	i = 0;
-	map_chars = (char *)malloc(sizeof(char) * (4));
-	if(map_chars == NULL)
-		return (NULL);
-	while(i <= 3)
-	{
-		map_chars[i] = map[i];
-		i++;
-	}
-	map_chars[i] = '\0';
-	return (map_chars);
-}
-
-int	ft_linelen(char *map)
-{
-	int	i;
-	
-	i = 0;
-	while (map[i] && map[i] != '\n')
-		i++;
-	return (i);
-}
-
-int	map_check_lineslen(char *map)
-{
-	int	i;
 	int	fl_l;
-	int	map_size;
+	char		*map_info;
 	
 	fl_l = ft_linelen(map);
-	map_size = ft_strlen(map);
-	i = 0;
-	while (i < map_size - 2)
+	i = 3;
+	map_info = (char *)malloc(sizeof(char) * (4));
+	if(map_info == NULL)
+		return (NULL);
+	while(i >= 0)
 	{
-		if (map[i] == '\n')
-		{
-			if (ft_linelen(&map[i + 1]) != fl_l)
-				return (0); 
-		}
-		i++;
+		map_info[i] = map[i];
+		i--;
 	}
-	return (1);
+	map_info[i] = '\0';
+	return (map_info);
 }
 
-int	map_check_breaklines(char *map, int num_l, int len_l)
+int	map_rows_qty(char *map, int fs_linelen)
 {
-	int	i;
-	int	bl;
-	
-	i = 0;
-	bl = len_l;
-	while (i <= num_l)
-	{
-		if(map[bl] != '\n')
-		{
-			return (0);
-			len_l = len_l + 1;
-			bl = bl + len_l;
-		}
-		i++;
-	}
-	return (1);
-}
+	char	*map_rows;
+	int	rows;
 
-int	map_check_chars(char *map, char *map_info)
-{
-	char	empty;
-	char	obstacle;
-	char	full;
-	int	i;
-
-	empty = map_info[1];
-	obstacle = map_info[2];
-	full = map_info[3];
-	i = 0;
-	while(map[i])
-	{
-		if(map[i] != empty || map[i] != obstacle || map[i] != full || map[i] != '\n')
-		{
-			printf("%c %c %c", empty, obstacle, full);
-		}
-		i++;
-	}
-	return (1);
-} //wip
-
-int	teste(char *map)
-{
-	int	i;
-	i = 0;
-	while(map[i] != '\n')
-		i++;
-	printf("%c = %d", map[47], i);
-	return 0;
+	map_rows = ft_strndup(map, fs_linelen - 3);
+	rows = atoi(map_rows);
+	return (rows);
 }
 
 int	main(int argc, char *argv[])
 {
 	char	map[BUF_SIZE];
 	char	*map_info;
-	int	ft_linel;
-
+	int	rows;
+	int	cols;
+	char	**matrix_map;
 
 	map_catch(argv[1], map);
-	ft_linel = ft_linelen(map + 5);
-	//printf("%d", ft_linel);
 	map_info = ft_map_info(map);
-	printf("the length of lines are valid?: %d\n", map_check_lineslen(map + 5));
-	printf("the lines end with break line?: %d\n", map_check_breaklines(map + 5, 8, ft_linel));
-	printf("the chars of the map are valid? %d\n", map_check_chars(map, map_info));
-	//printf("%d", ft_strlen(map));
-	//printf("%s\n", map_chars);
-	//printf("%s", map);
-//	teste(map + 5);
+	if(map_is_valid(map, map_info))
+	{
+		matrix_map = convert_to_matrix(map + 5, &rows, &cols);
+
+		max_sub_matrix(matrix_map, rows, cols);
+    		free(matrix_map);
+
+
+	}
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

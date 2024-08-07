@@ -32,4 +32,13 @@ mapa
 	map_check_chars(map + 5) => recebe o mapa e os caracteres declarados na primeira linha, se caso tenha algum
 				   diferente, retorna 0;
 
+	map_check_first_line(map) => checa se na primeira linha há 4 caracteres, se não repetidos e se são printavéis						(deve ser chamada antes de map_info)
+	
+	 ---> 
+	 		antes de salvar o mapa, fazer a verificação;
+
+TODO : o codigo assume que a quantidade de linhas é entre 1 e 9, se tiver 
+numero de dois digitos, vai dar ruim
+	então tenho que passar map + x, sendo x o total de char da primeira linha - 3
+
 
