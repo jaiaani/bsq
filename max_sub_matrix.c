@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-// Função auxiliar para encontrar o mínimo de três números
 int	min(int a, int b, int c) 
 {
 	int	l;

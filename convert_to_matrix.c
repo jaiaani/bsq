@@ -8,7 +8,6 @@ char *ft_strcpy(char *dest, const char *src) {
     return dest;
 }
 
-// Duplicar uma string
 char *ft_strdup(char *str) 
 {
     char *dup = malloc(ft_strlen(str) + 1);
@@ -18,7 +17,6 @@ char *ft_strdup(char *str)
     return dup;
 }
 
-// Encontrar a primeira ocorrência de um caractere em uma string
 char *ft_strchr(const char *s, int c) {
     while (*s) {
         if (*s == c) {
@@ -29,7 +27,6 @@ char *ft_strchr(const char *s, int c) {
     return NULL;
 }
 
-// Dividir uma string em tokens
 char *ft_strtok(char *str, const char *delim) {
     static char *last;
     if (str) {
@@ -62,16 +59,12 @@ char *ft_strtok(char *str, const char *delim) {
     return token;
 }
 
-// Copiar uma string para outra
-
-
 char **convert_to_matrix(char *map, int *rows, int *cols) {
     char **matrix;
 
     *rows = 0;
     *cols = 0;
 
-    // Contar o número de linhas
     char *ptr = map;
     while (*ptr) {
         if (*ptr == '\n') {
@@ -79,21 +72,17 @@ char **convert_to_matrix(char *map, int *rows, int *cols) {
         }
         ptr++;
     }
-    (*rows)++; // Para a última linha que não termina com '\n'
+    (*rows)++; 
 
-    // Encontrar o número de colunas (assumindo que todas as linhas têm o mesmo comprimento)
     char *temp = ft_strchr(map, '\n');
     if (temp) {
         *cols = temp - map;
     }
 
-    // Alocar memória para a matriz
     matrix = malloc(*rows * sizeof(char *));
     for (int i = 0; i < *rows; i++) {
-        matrix[i] = malloc((*cols + 1) * sizeof(char)); // +1 para o caractere nulo
-    }
-
-    // Preencher a matriz com os dados da string
+        matrix[i] = malloc((*cols + 1) * sizeof(char));
+   
     int row = 0;
     char *line = ft_strtok(map, "\n");
     while (line != NULL) {
